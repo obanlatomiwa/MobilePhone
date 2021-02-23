@@ -8,7 +8,7 @@ public class MobilePhone {
 
     public MobilePhone(String myNumber) {
         this.myNumber = myNumber;
-        this.myContacts = new ArrayList<Contacts>();
+        this.myContacts = new ArrayList<>();
     }
 
 //    add a new contact
@@ -43,6 +43,15 @@ public class MobilePhone {
         return null;
     }
 
+    public Contacts queryContact(String name){
+        int position = findContact(name);
+        if (position >= 0){
+            return this.myContacts.get(position);
+        }
+        return null;
+    }
+
+
     public boolean deleteContact(Contacts contact){
         int foundPosition = findContact(contact);
         if (foundPosition < 0){
@@ -50,7 +59,7 @@ public class MobilePhone {
             return false;
         }
         this.myContacts.remove(contact);
-        System.out.println("Contact" + contact.getName() + "was deleted");
+        System.out.println("Contact " + contact.getName() + " was deleted");
         return true;
     }
 
@@ -62,7 +71,14 @@ public class MobilePhone {
             return false;
         }
         this.myContacts.set(foundPosition, newContact);
-        System.out.println("Contact" + oldContact.getName() + "was replaced with" + newContact.getName());
+        System.out.println("Contact " + oldContact.getName() + " was replaced with " + newContact.getName());
         return true;
+    }
+
+    public void printContacts(){
+        System.out.println("Printing all available contacts");
+        for (int i=0; i<this.myContacts.size(); i++){
+            System.out.println((i + 1) + "  " + this.myContacts.get(i).getName() + "  ---  " + this.myContacts.get(i).getPhoneNumber());
+        }
     }
 }
